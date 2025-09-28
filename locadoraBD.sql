@@ -93,10 +93,23 @@ JOIN Filme f ON l.id_filme = f.id_filme
 WHERE cl.nome = 'Cibele Hipolito';
 
 -- EXEMPLO DE UPDATE
+-- Atualizar a quantidade de filmes do "Homem-Aranha" na locadora CineTop
+UPDATE Filme
+SET quantidade = 5
+WHERE nome = 'Homem-Aranha' AND id_locadora = (
+    SELECT id_locadora FROM Locadora WHERE nome = 'CineTop'
+);
+
 -- Atualizar a data de devolução de uma locação
 UPDATE Locacao
 SET data_devolucao = '2025-09-28'
 WHERE id_locacao = 2;
+
+-- quantidade do filme Homem-Aranha na locadora CineTop apos o update
+SELECT f.nome AS Filme, f.quantidade, lo.nome AS Locadora
+FROM Filme f
+JOIN Locadora lo ON f.id_locadora = lo.id_locadora
+WHERE f.nome = 'Homem-Aranha' AND lo.nome = 'CineTop';
 
 -- histórico de locações de um cliente específico apos o update
 SELECT cl.nome AS Cliente, f.nome AS Filme, l.data_locacao, l.data_devolucao
