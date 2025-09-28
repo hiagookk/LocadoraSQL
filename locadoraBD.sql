@@ -97,3 +97,10 @@ WHERE cl.nome = 'Cibele Hipolito';
 UPDATE Locacao
 SET data_devolucao = '2025-09-28'
 WHERE id_locacao = 2;
+
+-- histórico de locações de um cliente específico apos o update
+SELECT cl.nome AS Cliente, f.nome AS Filme, l.data_locacao, l.data_devolucao
+FROM Locacao l
+JOIN Cliente cl ON l.id_cliente = cl.id_cliente
+JOIN Filme f ON l.id_filme = f.id_filme
+WHERE cl.nome = 'Cibele Hipolito';
